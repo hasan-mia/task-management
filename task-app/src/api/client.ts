@@ -2,12 +2,12 @@ import axios from "axios";
 
 declare const process: {
   env: {
-    EXPO_PUBLIC_API_URL?: string;
+    API_URL?: string;
   };
 };
 
 const resolved =
-  process.env.EXPO_PUBLIC_API_URL ||
+  process.env.API_URL ||
   "http://localhost:3001";
 
 export const API_BASE_URL = resolved;
@@ -51,7 +51,7 @@ apiClient.interceptors.response.use(
     console.log("API ERROR DATA:", error.response?.data);
 
     if (!error.response) {
-      console.warn("Network error - server unreachable. Check that .env EXPO_PUBLIC_API_URL points to your machine's LAN IP, not localhost.");
+      console.warn("Network error - server unreachable. Check that .env API_URL points to your machine's LAN IP, not localhost.");
     }
 
     return Promise.reject(error);

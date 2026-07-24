@@ -27,7 +27,7 @@
 27: 
 28: 1. Ensure the backend is running on `http://localhost:3001`.
 29: 2. The app reads the API URL from `API_BASE_URL` in `.env`.
-30: 3. Because the app runs on an emulator/device, `localhost` in `.env` refers to the emulator itself, not your machine. Update `EXPO_PUBLIC_API_URL` to use your machine's LAN IP or the Android emulator alias.
+30: 3. Because the app runs on an emulator/device, `localhost` in `.env` refers to the emulator itself, not your machine. Update `API_URL` to use your machine's LAN IP or the Android emulator alias.
 4: 
 5: Example `.env`:
 6: 
