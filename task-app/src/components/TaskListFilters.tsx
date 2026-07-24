@@ -36,7 +36,7 @@ export function TaskListFilters({
   const dueDateFilters: { label: string; value: "all" | "today" | "thisWeek" | "overdue" | "next7Days" }[] = [
     { label: "All", value: "all" },
     { label: "Today", value: "today" },
-    { label: "This Week", value: "thisWeek" },
+    { label: "Week", value: "thisWeek" },
     { label: "Overdue", value: "overdue" },
     { label: "Next 7 Days", value: "next7Days" },
   ];

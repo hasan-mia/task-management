@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+// Official Expo-maintained drop-in replacement for @react-native-community/datetimepicker
+// (Jetpack Compose on Android, SwiftUI on iOS) — avoids third-party peer-dep churn.
+import DateTimePicker from "@expo/ui/community/datetime-picker";
 import { useTasks } from "../hooks/useTasks";
 import { useCategories } from "../hooks/useCategories";
 import { colors } from "../constants/theme";
@@ -12,6 +15,15 @@ type Props = {
   navigation: any;
 };
 
+// Local-date formatting (avoid toISOString(), which shifts by timezone offset
+// and can roll the date back/forward a day near midnight).
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
+
 export function TaskFormScreen({ route, navigation }: Props) {
   const { createTask } = useTasks();
   const { categories } = useCategories();
@@ -19,8 +31,16 @@ export function TaskFormScreen({ route, navigation }: Props) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState<string>("");
-  const [dueDate, setDueDate] = useState("");
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleDateChange = ({ nativeEvent: { timestamp } }: { nativeEvent: { timestamp: number } }) => {
+    // @expo/ui's datetime-picker keeps the community package's onChange event shape.
+    // presentation="dialog" self-dismisses on confirm/cancel on both platforms.
+    setShowDatePicker(false);
+    if (timestamp) setDueDate(new Date(timestamp));
+  };
 
   const handleSubmit = async () => {
     if (!title.trim()) {
@@ -34,7 +54,7 @@ export function TaskFormScreen({ route, navigation }: Props) {
         title: title.trim(),
         description: description.trim() || undefined,
         categoryId: categoryId || undefined,
-        dueDate: dueDate.trim() || undefined,
+        dueDate: dueDate ? formatDate(dueDate) : undefined,
         status: "open",
       });
       navigation.goBack();
@@ -101,16 +121,33 @@ export function TaskFormScreen({ route, navigation }: Props) {
         </View>
 
         <View className="mb-4">
-          <Text className="text-secondary text-xs font-semibold uppercase mb-1">Due Date (YYYY-MM-DD)</Text>
-          <TextInput
-            value={dueDate}
-            onChangeText={setDueDate}
-            className="bg-surface-light rounded-lg px-3 py-2 text-primary border border-surface-mid"
-            placeholder="2026-07-25"
-            placeholderTextColor={colors.textMuted}
-            autoCapitalize="none"
-            keyboardType="numbers-and-punctuation"
-          />
+          <Text className="text-secondary text-xs font-semibold uppercase mb-1">Due Date</Text>
+          <TouchableOpacity
+            onPress={() => setShowDatePicker(true)}
+            className="bg-surface-light rounded-lg px-3 py-2 border border-surface-mid flex-row items-center justify-between"
+          >
+            <Text className={dueDate ? "text-primary" : "text-muted"}>
+              {dueDate ? formatDate(dueDate) : "Select a date"}
+            </Text>
+            {dueDate && (
+              <TouchableOpacity onPress={() => setDueDate(null)} hitSlop={8}>
+                <Text className="text-secondary text-xs font-semibold">Clear</Text>
+              </TouchableOpacity>
+            )}
+          </TouchableOpacity>
+
+          {showDatePicker && (
+            <DateTimePicker
+              value={dueDate ?? new Date()}
+              mode="date"
+              // 'dialog' shows a native modal on both platforms; 'inline' would embed
+              // the calendar directly in the layout instead (no Done button needed then).
+              presentation="dialog"
+              minimumDate={new Date()}
+              onChange={handleDateChange}
+            />
+          )}
+
         </View>
 
         <TouchableOpacity

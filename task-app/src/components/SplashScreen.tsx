@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from "react-native";
 export function SplashScreen() {
   return (
     <View style={styles.container}>
-      <Image source={require("../../assets/splash.png")} style={styles.logo} resizeMode="contain" />
+      <Image source={require("../../assets/splash.png")} style={styles.logo} resizeMode="cover" />
     </View>
   );
 }
@@ -12,12 +12,12 @@ export function SplashScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000000",
+    backgroundColor: "#1D1B4D",
     justifyContent: "center",
     alignItems: "center",
   },
   logo: {
-    width: "100%",
-    height: "100%",
+    width: "120%",
+    height: "120%",
   },
 });

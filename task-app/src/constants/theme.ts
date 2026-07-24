@@ -1,17 +1,20 @@
 import { StyleSheet } from "react-native";
 
 export const colors = {
-  accent: "#E63946",
-  accentDark: "#C1121F",
-  surface: "#0F0F0F",
-  surfaceLight: "#1A1A1A",
-  surfaceMid: "#262626",
-  textPrimary: "#FFFFFF",
-  textSecondary: "#A3A3A3",
-  textMuted: "#737373",
+  accent: "#5B4CF0",
+  accentDark: "#4338CA",
+  surface: "#FFFFFF",
+  surfaceLight: "#EDE9FE",
+  surfaceMid: "#DDD6FE",
+  textPrimary: "#1D1B4D",
+  textSecondary: "#4B5563",
+  textMuted: "#9CA3AF",
   liveRed: "#EF4444",
-  focusBorder: "#E63946",
-  focusGlow: "rgba(230, 57, 70, 0.4)",
+  focusBorder: "#5B4CF0",
+  focusGlow: "rgba(91, 76, 240, 0.4)",
+  success: "#22C55E",
+  splashBackground: "#1D1B4D",
+  darkStroke: "#2F2A6B",
 };
 
 export const spacing = {

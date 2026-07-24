@@ -13,6 +13,7 @@ export function useTasks(filters?: { search?: string; categoryId?: string; statu
     isLoading: base.isLoading,
     isRefreshing: base.isRefreshing,
     isOffline: base.isOffline,
+    lastRefreshedAt: base.lastRefreshedAt,
     error: base.error,
     createTask: base.createTask,
     updateTask: base.updateTask,

@@ -16,7 +16,7 @@ export const TaskCard = memo(function TaskCard({ task, onPress }: TaskCardProps)
     <TouchableOpacity
       activeOpacity={0.85}
       onPress={onPress}
-      className="bg-surface-light rounded-xl border border-white/5 p-4 mb-3"
+      className="bg-surface-light rounded-xl border border-dark-stroke/10 p-4 mb-3"
     >
       <View className="flex-row items-start justify-between gap-2">
         <View className="flex-1">

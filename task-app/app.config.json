@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "Xtv",
-    "slug": "xtv-app",
+    "name": "Task App",
+    "slug": "task-management",
     "version": "1.0.1",
     "orientation": "default",
-    "scheme": "xtv",
+    "scheme": "task-management",
     "userInterfaceStyle": "automatic",
     "assetBundlePatterns": [
       "**/*"
@@ -12,13 +12,13 @@
     "icon": "./assets/icon.png",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.xtv.app",
+      "bundleIdentifier": "com.task.app",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "com.xtv.app",
+      "package": "com.task.app",
       "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
@@ -52,11 +52,12 @@
         "origin": false
       },
       "eas": {
-        "projectId": "899751d7-0d27-4042-a24f-cd280cb72fe8"
+        "projectId": "00dfc6bf-e879-4ce1-89f0-c35cf6d0a995"
       },
       "env": {
         "EXPO_ROUTER_DISABLE_RN_NAVIGATION_CHECK": "1"
       }
-    }
+    },
+    "owner": "hasanrafi69"
   }
 }

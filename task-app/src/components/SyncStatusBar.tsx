@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
-import { colors, spacing } from "../constants/theme";
+import { colors } from "../constants/theme";
 
 interface SyncStatusBarProps {
   lastRefreshedAt?: number;
@@ -33,9 +33,11 @@ export function SyncStatusBar({ lastRefreshedAt, isRefreshing, isOffline }: Sync
         ) : (
           <View className="w-2 h-2 rounded-full bg-emerald-500" />
         )}
-        <Text className="text-muted text-xs">
-          {lastRefreshedAt ? `Last refreshed: ${formatRelativeTime(lastRefreshedAt)}` : "Syncing..."}
-        </Text>
+        {isRefreshing ? (
+          <Text className="text-muted text-xs">Syncing...</Text>
+        ) : lastRefreshedAt ? (
+          <Text className="text-muted text-xs">Last refreshed: {formatRelativeTime(lastRefreshedAt)}</Text>
+        ) : null}
       </View>
     </View>
   );

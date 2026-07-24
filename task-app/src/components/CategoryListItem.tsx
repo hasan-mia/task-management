@@ -12,7 +12,7 @@ export function CategoryListItem({ category, onPress }: CategoryListItemProps) {
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
-      className="flex-row items-center justify-between bg-surface-light rounded-xl border border-white/5 px-4 py-3 mb-3"
+      className="flex-row items-center justify-between bg-surface-light rounded-xl border border-dark-stroke/10 px-4 py-3 mb-3"
     >
       <View>
         <Text className="text-primary text-base font-semibold">{category.name}</Text>

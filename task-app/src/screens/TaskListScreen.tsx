@@ -25,7 +25,7 @@ export function TaskListScreen({ navigation }: Props) {
 
   const { categories } = useCategories();
 
-  const { tasks, isLoading, isRefreshing, isOffline, refetch } = useTasks();
+  const { tasks, isLoading, isRefreshing, isOffline, lastRefreshedAt, refetch } = useTasks();
 
   const filtered = useTaskFilters(tasks, {
     search,
@@ -44,7 +44,7 @@ export function TaskListScreen({ navigation }: Props) {
 
   return (
     <SafeAreaView className="flex-1 bg-surface">
-      <SyncStatusBar isRefreshing={isRefreshing} isOffline={isOffline} />
+      <SyncStatusBar isRefreshing={isRefreshing} isOffline={isOffline} lastRefreshedAt={lastRefreshedAt} />
       <SearchBar value={search} onChange={setSearch} />
       <TaskListFilters
         categories={categories}
@@ -64,7 +64,7 @@ export function TaskListScreen({ navigation }: Props) {
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#E63946" />
+          <ActivityIndicator size="large" color="#5B4CF0" />
           <Text className="text-secondary mt-2">Loading tasks...</Text>
         </View>
       ) : !hasTasks ? (
@@ -77,7 +77,7 @@ export function TaskListScreen({ navigation }: Props) {
           data={filtered}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 24 }}
-          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} tintColor="#E63946" />}
+          refreshControl={<RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} tintColor="#5B4CF0" />}
           renderItem={({ item }) => (
             <TaskCard
               task={item}

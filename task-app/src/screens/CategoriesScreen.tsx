@@ -24,7 +24,7 @@ export function CategoriesScreen() {
             onChangeText={setName}
             className="flex-1 bg-surface-light rounded-lg px-3 py-2 text-primary border border-surface-mid"
             placeholder="New category name"
-            placeholderTextColor="#737373"
+            placeholderTextColor="#9CA3AF"
             autoCapitalize="words"
             returnKeyType="done"
             onSubmitEditing={handleAdd}
